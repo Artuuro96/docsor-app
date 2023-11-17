@@ -15,20 +15,20 @@ const GREY = {
 };
 
 const PRIMARY = {
-  lighter: '#99f0dd',
+  lighter: '#40e3bf',
   light: '#40e3bf',
   main: '#18a586',
   dark: '#106d59',
-  darker: '#08362c',
+  darker: '#106d59',
   contrastText: '#fff',
 };
 
 const SECONDARY = {
-  lighter: '#D6E4FF',
-  light: '#84A9FF',
-  main: '#323232',
-  dark: '#18a586',
-  darker: '#0b4c3e',
+  lighter: '#424447',
+  light: '#424447',
+  main: '#2d2f33',
+  dark: '#121314',
+  darker: '#121314',
   contrastText: '#fff',
 };
 
@@ -84,7 +84,7 @@ const palette = {
     disabled: GREY[500],
   },
   background: {
-    default: '#2C2F33',
+    default: '#2d2f33',
   },
   action: {
     active: GREY[600],

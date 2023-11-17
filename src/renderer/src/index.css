@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Jost';
-  src: url('../../public/fonts/Jost-VariableFont_wght.ttf') format('truetype');
+  src: url('./fonts/Jost-VariableFont_wght.ttf') format('truetype');
   font-weight: normal;
   font-style: normal;
 }
@@ -24,8 +24,6 @@
 body {
   font-family: 'Jost';
   margin: 0;
-  display: flex;
-  min-width: 320px;
   min-height: 100vh;
 }
 

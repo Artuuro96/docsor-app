@@ -28,7 +28,7 @@ export default function Router(): ReactNode {
     },
     {
       path: '*',
-      element: <Navigate to="/404" replace />,
+      element: <Navigate to="/recents" replace />,
     },
   ];
 

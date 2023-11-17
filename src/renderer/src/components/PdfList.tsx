@@ -1,14 +1,30 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DndContext, closestCenter } from '@dnd-kit/core';
-import { SortableContext, arrayMove, verticalListSortingStrategy } from '@dnd-kit/sortable';
+import {
+  SortableContext,
+  arrayMove,
+  horizontalListSortingStrategy,
+  verticalListSortingStrategy,
+} from '@dnd-kit/sortable';
 import PdfItem from './PdfItem';
+import { Grid } from '@mui/material';
 
-function PdfList(): JSX.Element {
-  const [pdfs, setPdfs] = useState([
-    { id: 1, item: 'John' },
-    { id: 2, item: 'Sarah' },
-    { id: 3, item: 'Paul' }
-  ]);
+interface PdfFile {
+  id: string;
+  file: File;
+}
+
+function PdfList({ files }: { files: File[] }): JSX.Element {
+  const [pdfs, setPdfs] = useState<PdfFile[]>([]);
+
+  useEffect(() => {
+    // Convertir los archivos File en objetos con una propiedad id única
+    const pdfFiles: PdfFile[] = files.map((file, index) => ({
+      id: `${index}-${file.name}`, // Asignar un id único a cada archivo
+      file,
+    }));
+    setPdfs(pdfFiles);
+  }, [files]);
 
   const handleDragEnd = (event): void => {
     const { active, over } = event;
@@ -29,18 +45,15 @@ function PdfList(): JSX.Element {
   };
 
   return (
-    <div className="flex justify-center items-center">
-      <div className="w-4/6">
-        <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-          <h1 className="text-2xl font-bold">Users List</h1>
-          <SortableContext items={pdfs} strategy={verticalListSortingStrategy}>
-            {pdfs.map((pdf) => (
-              <PdfItem key={pdf.id} item={pdf.item} id={pdf.id} />
-            ))}
-          </SortableContext>
-        </DndContext>
-      </div>
-    </div>
+    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+      <SortableContext items={pdfs} strategy={horizontalListSortingStrategy}>
+        <Grid container spacing={4} sx={{ padding: '10px' }}>
+          {pdfs.map((pdf) => (
+            <PdfItem key={pdf.id} id={pdf.id} content={pdf.file} />
+          ))}
+        </Grid>
+      </SortableContext>
+    </DndContext>
   );
 }
 

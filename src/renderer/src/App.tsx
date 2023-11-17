@@ -4,7 +4,6 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 import palette from './pallete';
 import { BrowserRouter } from 'react-router-dom';
 import Router from './routes';
-// Define el tema personalizado con la fuente deseada
 
 const theme = createTheme({
   typography: {
