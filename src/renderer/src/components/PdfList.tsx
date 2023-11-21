@@ -1,12 +1,7 @@
 import { useEffect, useState } from 'react';
 import { DndContext, closestCenter } from '@dnd-kit/core';
-import {
-  SortableContext,
-  arrayMove,
-  horizontalListSortingStrategy,
-  verticalListSortingStrategy,
-} from '@dnd-kit/sortable';
-import PdfItem from './PdfItem';
+import { SortableContext, arrayMove, horizontalListSortingStrategy } from '@dnd-kit/sortable';
+import PdfThumbnail from './PdfThumbnail';
 import { Grid } from '@mui/material';
 
 interface PdfFile {
@@ -18,9 +13,8 @@ function PdfList({ files }: { files: File[] }): JSX.Element {
   const [pdfs, setPdfs] = useState<PdfFile[]>([]);
 
   useEffect(() => {
-    // Convertir los archivos File en objetos con una propiedad id única
     const pdfFiles: PdfFile[] = files.map((file, index) => ({
-      id: `${index}-${file.name}`, // Asignar un id único a cada archivo
+      id: `${index}-${file.name}`,
       file,
     }));
     setPdfs(pdfFiles);
@@ -40,20 +34,22 @@ function PdfList({ files }: { files: File[] }): JSX.Element {
         return arrayMove(people, oldIndex, newIndex);
       });
     }
-
-    console.log('drag end');
   };
 
   return (
-    <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
-      <SortableContext items={pdfs} strategy={horizontalListSortingStrategy}>
-        <Grid container spacing={4} sx={{ padding: '10px' }}>
-          {pdfs.map((pdf) => (
-            <PdfItem key={pdf.id} id={pdf.id} content={pdf.file} />
-          ))}
-        </Grid>
-      </SortableContext>
-    </DndContext>
+    <>
+      <DndContext collisionDetection={closestCenter} onDragEnd={handleDragEnd}>
+        <SortableContext items={pdfs} strategy={horizontalListSortingStrategy}>
+          <Grid container spacing={4} sx={{ padding: '10px' }}>
+            {pdfs.map((pdf) => (
+              <>
+                <PdfThumbnail key={pdf.id} id={pdf.id} content={pdf.file} />
+              </>
+            ))}
+          </Grid>
+        </SortableContext>
+      </DndContext>
+    </>
   );
 }
 

@@ -20,38 +20,40 @@ export default function ToolsPage(): JSX.Element {
       </Grid>
       <Divider sx={{ marginBottom: '10px', marginTop: '20px' }}></Divider>
       {showSelectFiles ? (
-        <Grid container spacing={4} sx={{ padding: '10px' }}>
-          <Grid item xs={3} onClick={(): void => handleStepper(1)}>
-            <CardOption
-              title="Unir PDF"
-              description="Selecciona y une archivos PDF para formar uno solo"
-              icon="mergeDoc"
-            />
+        <>
+          <Grid container spacing={4} sx={{ padding: '10px' }}>
+            <Grid item xs={3} onClick={(): void => handleStepper(1)}>
+              <CardOption
+                title="Unir PDF"
+                description="Selecciona y une archivos PDF para formar uno solo"
+                icon="mergeDoc"
+              />
+            </Grid>
+            <Grid item xs={3} onClick={(): void => handleStepper(1)}>
+              <CardOption
+                title="Asegura tu PDF"
+                description="Agrega contraseña y protege tu archivo pdf"
+                icon="lockDoc"
+              />
+            </Grid>
+            <Grid item xs={3} onClick={(): void => handleStepper(1)}>
+              <CardOption
+                title="PDF a Imagen"
+                description="Tranforma un archivo PDF seleccionado en una imagen"
+                icon="imageDoc"
+              />
+            </Grid>
+            <Grid item xs={3} onClick={(): void => handleStepper(1)}>
+              <CardOption
+                title="Comprimir PDF"
+                description="Selecciona y comprime multiples archivos PDF"
+                icon="compresionDoc"
+              />
+            </Grid>
           </Grid>
-          <Grid item xs={3} onClick={(): void => handleStepper(1)}>
-            <CardOption
-              title="Asegura tu PDF"
-              description="Agrega contraseña y protege tu archivo pdf"
-              icon="lockDoc"
-            />
-          </Grid>
-          <Grid item xs={3} onClick={(): void => handleStepper(1)}>
-            <CardOption
-              title="PDF a Imagen"
-              description="Tranforma un archivo PDF seleccionado en una imagen"
-              icon="imageDoc"
-            />
-          </Grid>
-          <Grid item xs={3} onClick={(): void => handleStepper(1)}>
-            <CardOption
-              title="Comprimir PDF"
-              description="Selecciona y comprime multiples archivos PDF"
-              icon="compresionDoc"
-            />
-          </Grid>
-        </Grid>
+        </>
       ) : (
-        <SelectFile />
+        <SelectFile handleStepper={handleStepper} />
       )}
     </>
   );
